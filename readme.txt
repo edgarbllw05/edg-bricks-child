@@ -1,5 +1,5 @@
 Modern and lightweight child theme for Bricks
-Theme GitHub Repo: https://edgarbollow.com/go/github/repos/edg-bricks-child
+GitHub Repo: https://edgarbollow.com/go/github/repos/edg-bricks-child
 Created by Edgar Bollow
 My website: https://blog.edgarbollow.com
 
