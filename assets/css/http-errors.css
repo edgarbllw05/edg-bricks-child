@@ -1,0 +1,92 @@
+/* #region Variables */
+:root {
+	--color-background: 0 0% 100%;
+	--color-foreground: 240 10% 3.9%;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-background: 240 10% 3.9%;
+		--color-foreground: 0 0% 98%;
+	}
+}
+/* #endregion Variables */
+
+
+/* #region Normalize */
+*,
+::before,
+::after {
+	box-sizing: border-box;
+}
+
+@media print {
+	*,
+	::before,
+	::after {
+		color: hsl(0 0% 0%) !important;
+		background-color: transparent !important;
+	}
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	font: inherit;
+}
+
+html {
+	color-scheme: light dark;
+}
+
+body {
+	color: hsl(var(--color-foreground));
+	background-color: hsl(var(--color-background));
+	font-family: system-ui;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	width: min(700px, 100% - clamp(1.25rem, -.4167rem + 6.6667vw, 3.75rem) * 2);
+	margin-inline: auto;
+	padding-block: clamp(2.5rem, 1.6667rem + 3.3333vw, 3.75rem);
+	overflow-x: hidden;
+	overflow-wrap: break-word;
+	text-rendering: optimizeSpeed;
+	font-smooth: always;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-size-adjust: none;
+	-webkit-text-size-adjust: none;
+	-moz-text-size-adjust: none;
+	print-color-adjust: exact;
+	-webkit-print-color-adjust: exact;
+}
+
+@media (width <= 600px) {
+	body {
+		hyphens: auto;
+		-webkit-hyphens: auto;
+	}
+}
+
+@media (width > 600px) {
+	body {
+		text-align: center;
+		text-wrap: balance;
+	}
+}
+/* #endregion Normalize */
+
+
+/* #region Components */
+h1 {
+	font-size: clamp(1.5rem, 1.25rem + 1vw, 1.875rem);
+	font-weight: 600;
+	line-height: 1.25;
+	margin-bottom: .625em;
+}
+
+p {
+	font-size: 1.125rem;
+}
+/* #endregion Components */
