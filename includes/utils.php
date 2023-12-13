@@ -62,6 +62,17 @@ function edg_credit_url( $referrer ) {
 	return $url;
 }
 
+function edg_404_back_url() {
+	$url = home_url();
+	$url = add_query_arg( [
+		'utm_source' => 'same-origin',
+		'utm_medium' => '404',
+		'utm_campaign' => rawurlencode( $_SERVER[ 'REQUEST_URI' ] ),
+	], $url );
+
+	return $url;
+}
+
 function edg_cookie_status() {
 	if ( ! function_exists( 'cn_cookies_accepted' ) ) return;
 
@@ -95,13 +106,43 @@ function edg_cookies_declined() {
 	return edg_cookie_status() === 'declined';
 }
 
-function edg_404_back_url() {
-	$url = home_url();
-	$url = add_query_arg( [
-		'utm_source' => 'same-origin',
-		'utm_medium' => '404',
-		'utm_campaign' => rawurlencode( $_SERVER[ 'REQUEST_URI' ] ),
-	], $url );
+function edg_cookie_notice_text() {
+	$info = __( 'We use cookies to optimize our content for you and to give you the best possible experience. Please allow us to use them so that we can provide you with exactly what you are looking for.', 'edg-bricks-child' );
 
-	return $url;
+	if ( edg_cookies_not_set() && ! is_privacy_policy() ) {
+		$privacy_policy_url = get_privacy_policy_url();
+		$info .= ' <a href="' . $privacy_policy_url . '#cookie-status" target="_blank">' . __( 'Learn more', 'edg-bricks-child' ) . '</a>';
+	}
+
+	if ( edg_cookies_not_set() && is_privacy_policy() ) {
+		$info .= ' <a href="#cookie-status">' . __( 'Learn more', 'edg-bricks-child' ) . '</a>';
+	}
+
+	if ( edg_cookies_accepted() ) {
+		$info .= ' ' . __( 'Tracking is currently enabled on this website.', 'edg-bricks-child' ) . ' ' . __( 'Do you want to decline our cookies?', 'edg-bricks-child' );
+	}
+
+	if ( edg_cookies_declined() ) {
+		$info .= ' ' . __( 'Tracking is currently disabled on this website.', 'edg-bricks-child' ) . ' ' . __( 'Do you want to accept our cookies?', 'edg-bricks-child' );
+	}
+
+	return $info;
+}
+
+function edg_manage_cookies() {
+	$info = '';
+
+	if ( edg_cookies_not_set() ) {
+		$info = __( 'Tracking is currently disabled on this website.', 'edg-bricks-child' );
+	}
+
+	if ( edg_cookies_accepted() ) {
+		$info = __( 'Tracking is currently enabled on this website.', 'edg-bricks-child' ) . '<button class="edg-manage-cookies cn-revoke-cookie">' . __( 'Disable now', 'edg-bricks-child' ) . '</button>';
+	}
+
+	if ( edg_cookies_declined() ) {
+		$info = __( 'Tracking is currently disabled on this website.', 'edg-bricks-child' ) . '<button class="edg-manage-cookies cn-revoke-cookie">' . __( 'Enable now', 'edg-bricks-child' ) . '</button>';
+	}
+
+	return $info;
 }
