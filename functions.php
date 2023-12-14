@@ -43,9 +43,8 @@ add_filter( 'run_wptexturize', '__return_false' );
 add_filter( 'option_use_smilies', '__return_false' );
 # Hide the generator for both the HTML but also the feed URL (`yoursite.com/feed/`) which reveals the current WP version
 add_filter( 'the_generator', '__return_empty_string' );
-# Remove Rank Math DOM credit notice
+# Remove Rank Math credit notices
 add_filter( 'rank_math/frontend/remove_credit_notice', '__return_true' );
-# Remove credit notice on Rank Math sitemaps
 add_filter( 'rank_math/sitemap/remove_credit', '__return_true' );
 # Remove Rank Math restriction for post keywords (max. 5)
 add_filter( 'rank_math/focus_keyword/maxtags', function () {
