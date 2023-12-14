@@ -45,12 +45,12 @@ add_filter( 'option_use_smilies', '__return_false' );
 add_filter( 'the_generator', '__return_empty_string' );
 # Remove Rank Math DOM credit notice
 add_filter( 'rank_math/frontend/remove_credit_notice', '__return_true' );
+# Remove credit notice on Rank Math sitemaps
+add_filter( 'rank_math/sitemap/remove_credit', '__return_true' );
 # Remove Rank Math restriction for post keywords (max. 5)
 add_filter( 'rank_math/focus_keyword/maxtags', function () {
 	return PHP_INT_MAX;
 } );
-# Remove credit notice on Rank Math sitemaps
-add_filter( 'rank_math/sitemap/remove_credit', '__return_true' );
 # Disable Bricks web fonts
 add_filter( 'bricks/assets/load_webfonts', '__return_false' );
 # Disable Bricks page title for non-Bricks pages
