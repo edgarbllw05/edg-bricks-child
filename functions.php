@@ -43,6 +43,14 @@ add_filter( 'run_wptexturize', '__return_false' );
 add_filter( 'option_use_smilies', '__return_false' );
 # Hide the generator for both the HTML but also the feed URL (`yoursite.com/feed/`) which reveals the current WP version
 add_filter( 'the_generator', '__return_empty_string' );
+# Remove Rank Math DOM credit notice
+add_filter( 'rank_math/frontend/remove_credit_notice', '__return_true' );
+# Remove Rank Math restriction for post keywords (max. 5)
+add_filter( 'rank_math/focus_keyword/maxtags', function () {
+	return PHP_INT_MAX;
+} );
+# Remove credit notice on Rank Math sitemaps
+add_filter( 'rank_math/sitemap/remove_credit', '__return_true' );
 # Disable Bricks web fonts
 add_filter( 'bricks/assets/load_webfonts', '__return_false' );
 # Disable Bricks page title for non-Bricks pages
@@ -434,6 +442,7 @@ add_action( 'wp_before_admin_bar_render', function () {
 	$wp_admin_bar->remove_menu( 'updates' );
 	$wp_admin_bar->remove_menu( 'comments' );
 	$wp_admin_bar->remove_menu( 'new-content' );
+	$wp_admin_bar->remove_menu( 'rank-math' );
 	$wp_admin_bar->remove_menu( 'search' );
 	$wp_admin_bar->remove_menu( 'archive' );
 	$wp_admin_bar->remove_menu( 'view' );
@@ -468,6 +477,8 @@ function edg_admin_dashboard_clean_up() {
 	remove_meta_box( 'dashboard_php_nag', 'dashboard', 'normal' );
 	# Cookie Notice (https://wordpress.org/plugins/cookie-notice/)
 	remove_meta_box( 'cn_dashboard_stats', 'dashboard', 'normal' );
+	# Rank Math
+	remove_meta_box( 'rank_math_dashboard_widget', 'dashboard', 'normal' );
 	# WooCommerce
 	remove_meta_box( 'wc_admin_dashboard_setup', 'dashboard', 'normal' );
 }
