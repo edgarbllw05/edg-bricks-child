@@ -103,15 +103,19 @@ remove_action( 'wp_head', 'wp_generator' );
 remove_action( 'wp_head', 'wp_shortlink_wp_head' );
 remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
 
-// add_action( 'wp_enqueue_scripts', function () {
-// 	wp_deregister_style( 'cookie-notice-front' );
-// 	wp_deregister_script( '' );
-// }, 999999 );
+add_action( 'wp_enqueue_scripts', function () {
+	wp_deregister_style( 'classic-theme-styles' );
+	wp_deregister_style( 'global-styles' );
+	wp_deregister_style( 'bricks-frontend' );
+	wp_deregister_style( 'jet-fb-advanced-choices' );
+	wp_deregister_style( 'cookie-notice-front' );
+	wp_deregister_style( 'wp-block-library' );
+}, 999999 );
 
-// add_action( 'wp_footer', function () {
-// 	wp_deregister_style( '' );
-// 	wp_deregister_script( '' );
-// } );
+add_action( 'wp_footer', function () {
+	wp_deregister_style( 'global-styles' );
+	wp_deregister_style( 'jet-form-builder-frontend' );
+} );
 #endregion Clean up DOM
 
 
