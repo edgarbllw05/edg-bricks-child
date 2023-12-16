@@ -374,6 +374,15 @@ select,
 		opacity: 0;
 	}
 }
+
+.edg-count-h2 {
+	counter-reset: edg-count-h2;
+}
+
+.edg-count-h2 h2::before {
+	content: counter(edg-count-h2) ". ";
+	counter-increment: edg-count-h2;
+}
 /* #endregion Utils */
 
 
